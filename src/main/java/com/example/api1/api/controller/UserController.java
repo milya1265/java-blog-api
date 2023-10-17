@@ -26,12 +26,12 @@ public class UserController {
 
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public ResponseEntity<String> newProfile(@RequestBody User user){
-        userService.newUser(user);
+        userService.create(user);
         return ResponseEntity.ok("success");
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
-    public ArrayList<User> All() {
+    public ArrayList<User> getAll() {
         return (ArrayList<User>)  userService.getAll();
     }
 
@@ -47,22 +47,4 @@ public class UserController {
         userService.update(userID, user.getEmail(), user.getUsername());
         return ResponseEntity.ok("success");
     }
-//
-//    @RequestMapping(value = "/", method = RequestMethod.PUT)
-//    public ResponseEntity<String> updateCustomer(@Valid @RequestBody Customer customer) {
-//        customerService.updateCustomer(customer);
-//        usersService.updateById(customer.getId(), customer.getEmail(), customer.getFullName());
-//        return ResponseEntity.ok("Success");
-//    }
-//
-//    @RequestMapping(value = "/booking", method = RequestMethod.GET)
-//    public List<BookingInfoDto> customersBookings(@RequestParam(required = false) String email) {
-//        Customer customer = customerService.getByEmail(email);
-//        return bookingService.getByPhoneNumber(customer.getPhoneNumber());
-//    }
-//
-//    @RequestMapping(value = "/booking/{bookingId}", method = RequestMethod.DELETE)
-//    public void customersBookingsDelete(@PathVariable Integer bookingId) {
-//        bookingSel;
-//    }
 }

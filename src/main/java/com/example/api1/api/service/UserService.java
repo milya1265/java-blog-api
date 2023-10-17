@@ -22,7 +22,7 @@ public class UserService  {
         return userRepository.findAll();
     }
 
-    public void newUser(User user) {
+    public void create(User user) {
         userRepository.save(user);
     }
 

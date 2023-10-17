@@ -1,5 +1,7 @@
 package com.example.api1;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,6 +9,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Api1Application {
 
     public static void main(String[] args) {
+
+
+
 
 /*
         User user1 = new User("Vasya", "lolkek@mail.ru", "qwerty");
@@ -19,6 +24,7 @@ public class Api1Application {
         User user8 = new User("David", "david@example.com", "qwerty");
         User user9 = new User("Olivia", "olivia@example.com", "qwerty");
 */
+
 
         SpringApplication.run(Api1Application.class, args);
     }
