@@ -27,7 +27,7 @@ public class Post {
     Date time;
     @Column(name = "text")
     String text;
-    @Column(name = "cnt_of_files")
-    Integer countOfFiles;
+    @Column(name = "number_of_files")
+    Integer numberOfFiles;
 
 }
