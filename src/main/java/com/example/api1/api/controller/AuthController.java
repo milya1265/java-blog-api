@@ -1,11 +1,9 @@
 package com.example.api1.api.controller;
-import com.example.api1.api.dtos.*;
+import com.example.api1.api.DTO.*;
 import com.example.api1.api.model.User;
 import com.example.api1.api.service.UserService;
 import com.example.api1.api.utils.JwtTokenUtils;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.connector.Response;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,8 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
