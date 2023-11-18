@@ -18,7 +18,6 @@ public class PostController {
         this.postService = s;
     }
 
-
     @RequestMapping(value = "/post/{postID}", method = RequestMethod.GET)
     public Post getPost(@PathVariable Integer postID) {
         return postService.getById(postID);

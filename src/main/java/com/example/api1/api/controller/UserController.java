@@ -5,11 +5,11 @@ import com.example.api1.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.security.Principal;
 
 import java.util.ArrayList;
 
 @RestController
-//@RequestMapping("/user")
 public class UserController {
 
     private UserService userService;
@@ -20,14 +20,8 @@ public class UserController {
     }
 
     @RequestMapping(value = "/user/{userID}", method = RequestMethod.GET)
-    public User myProfile(@PathVariable String userID) {
+    public User userForId(@PathVariable String userID) {
         return userService.getById(userID);
-    }
-
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public ResponseEntity<String> newProfile(@RequestBody User user){
-        userService.create(user);
-        return ResponseEntity.ok("success");
     }
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -44,7 +38,7 @@ public class UserController {
 
     @RequestMapping(value = "/user/{userID}", method = RequestMethod.PUT)
     public ResponseEntity<String> Update(@PathVariable String userID, @RequestBody User user){
-        userService.update(userID, user.getEmail(), user.getUsername());
+        userService.update(userID, user.getUsername(), user.getUsername());
         return ResponseEntity.ok("success");
     }
 }

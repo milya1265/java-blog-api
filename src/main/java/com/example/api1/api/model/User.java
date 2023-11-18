@@ -3,7 +3,6 @@ package com.example.api1.api.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 @Entity
 @Data
 @Builder
@@ -15,16 +14,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false, unique = true)
     private String id;
-    @Column(name = "username")
+    @Column(name = "username", unique = true)
     private String username;
-    @Column(name = "email", unique = true)
-    private String email;
-    @Column(name = "password")
-    private String password;
+    @Column(name = "password_hash")
+    private String passwordHash;
 
-    public User(String username, String email, String password){
+    public User(String username, String password) {
         this.username = username;
-        this.email = email;
-        this.password = password;
+        this.passwordHash = password;
     }
 }
