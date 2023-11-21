@@ -13,7 +13,7 @@ import java.util.Date;
 @Data
 public class PostRes {
     Integer id;
-    String username;
+    String author;
     Date time;
     String text;
     ArrayList<String> photos;

@@ -33,7 +33,16 @@ public class PostService {
     }
 
     public Post create(Post post) {
-        return postRepository.save(post);
+        Optional<User> u = userRepository.findByUsername(post.getAuthor());
+        if (u.isPresent()){
+            post.setAuthor(u.get().getId());
+            return postRepository.save(post);
+        }
+
+        post.setAuthor("");
+        post.setText("");
+        post.setId(0);
+        return post;
     }
 
     public Iterable<Post> getAll() {
@@ -69,8 +78,8 @@ public class PostService {
         return photosID;
     }
 
-    public ArrayList<PostRes> getFeed() {
-        Iterable<Post> iterable = postRepository.findAll();
+    public ArrayList<PostRes> getFeed(Integer pageNum) {
+        Iterable<Post> iterable = postRepository.findAllBySNumber(pageNum--);
         ArrayList<PostRes> res = new ArrayList<>();
         List<Post> posts = new ArrayList<>();
         iterable.forEach(posts::add);
@@ -79,7 +88,7 @@ public class PostService {
 
             Optional<User> u = userRepository.findById(posts.get(i).getAuthor());
             PostRes postRes = PostRes.builder()
-                    .username(u.get().getUsername())
+                    .author(u.get().getUsername())
                     .time(posts.get(i).getTime())
                     .id(posts.get(i).getId())
                     .photos(photos)
@@ -87,6 +96,8 @@ public class PostService {
                     .time(posts.get(i).getTime()).build();
             res.add(postRes);
         }
+
+
         return res;
     }
 

@@ -33,7 +33,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/auth").permitAll()
                         .requestMatchers("/registration").permitAll()
-                        .anyRequest().permitAll() //.authenticated()
+                        .requestMatchers("/files/{filename:.+}").permitAll()
+//                        .anyRequest().permitAll()
+
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement((sessionManagment) -> sessionManagment
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

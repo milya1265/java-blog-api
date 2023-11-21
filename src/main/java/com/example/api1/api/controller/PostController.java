@@ -18,8 +18,9 @@ public class PostController {
     private PictureService pictureService;
 
     @Autowired
-    public PostController(PostService s) {
+    public PostController(PostService s, PictureService p) {
         this.postService = s;
+        this.pictureService = p;
     }
 
     @RequestMapping(value = "/post/{postID}", method = RequestMethod.GET)
@@ -29,7 +30,7 @@ public class PostController {
     }
 
     @RequestMapping(value = "/post", method = RequestMethod.POST)
-    public ResponseEntity<String> newPost(@RequestBody PostReq postReq) { //@RequestParam("file") MultipartFile file
+    public PostRes newPost(@RequestBody PostReq postReq) { //@RequestParam("file") MultipartFile file
         Post post = Post.builder()
                 .text(postReq.getText())
                 .author(postReq.getAuthor())
@@ -37,16 +38,25 @@ public class PostController {
                 .build();
 
         post = postService.create(post);
-        postService.connectPostToPhoto(post.getId(), postReq.getPhotosID());
 
+        if (postReq.getPhotosID() !=  null){
+            postService.connectPostToPhoto(post.getId(), postReq.getPhotosID());
+        }
 
-        return ResponseEntity.ok("success");
+        PostRes res = PostRes.builder()
+                .text(post.getText())
+                .id(post.getId())
+                .time(post.getTime())
+                .author(post.getAuthor())
+                .photos(postReq.getPhotosID())
+                .build();
+        return res;
     }
 
-    @RequestMapping(value = "/posts", method = RequestMethod.GET)
+/*    @RequestMapping(value = "/posts", method = RequestMethod.GET)
     public ArrayList<PostRes> getAll() {
         return postService.getFeed();
-    }
+    }*/
 
 
     @RequestMapping(value = "/post/{postID}", method = RequestMethod.DELETE)
@@ -61,9 +71,9 @@ public class PostController {
         return ResponseEntity.ok("success");
     }
 
-    @RequestMapping(value = "/feed", method = RequestMethod.GET)
-    public ArrayList<PostRes> getFeedController() {
-        return postService.getFeed();
+    @RequestMapping(value = "/feed/{numPage}", method = RequestMethod.GET)
+    public ArrayList<PostRes> getFeedController(@PathVariable Integer numPage) {
+        return postService.getFeed(numPage);
     }
 
 

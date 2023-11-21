@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 @Builder
 @NoArgsConstructor
@@ -14,7 +13,6 @@ import java.util.Date;
 @Data
 public class PostReq {
     String author;
-    Date time;
     String text;
     ArrayList<String> photosID;
 }
