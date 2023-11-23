@@ -6,25 +6,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
-
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "posts")
-public class Post {
-
+@Table(name = "pictures")
+public class Picture {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "id", nullable = false, unique = true)
-    Integer id;
-    @Column(name = "author", nullable = false)
-    String author;
-    @Column(name = "time", nullable = false)
-    Date time;
-    @Column(name = "text")
-    String text;
+    String id;
+
+    @Column(name = "uri", nullable = false, unique = true)
+    String uri;
+
+    @Column(name = "file_type", nullable = false)
+    String fileType;
 }
