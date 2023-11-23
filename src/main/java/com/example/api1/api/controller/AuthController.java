@@ -36,11 +36,14 @@ public class AuthController {
 
     @PostMapping("/registration")
     public ResponseEntity<?> createUser(@RequestBody CreateUserRequestBody createUserRequestBody) {
+
         if (!userService.findByUsername(createUserRequestBody.getUsername()).isEmpty()) {
+            System.out.println("РУКИ ИЗ ЖОПЫ");
             return new ResponseEntity<>(new ErrorResponse(HttpStatus.BAD_REQUEST.value(), "Руки из жопы достань"), HttpStatus.BAD_REQUEST);
         }
 
         User user = new User(createUserRequestBody.getUsername(), passwordEncoder.encode(createUserRequestBody.getPassword()));
+        System.out.println(user);
         userService.create(user);
         return ResponseEntity.ok(new CreateUserResponse(user.getId(), user.getUsername()));
     }

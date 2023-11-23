@@ -79,7 +79,7 @@ public class PostService {
     }
 
     public ArrayList<PostRes> getFeed(Integer pageNum) {
-        Iterable<Post> iterable = postRepository.findAllBySNumber(pageNum--);
+        Iterable<Post> iterable = postRepository.findAllBySNumber(pageNum);
         ArrayList<PostRes> res = new ArrayList<>();
         List<Post> posts = new ArrayList<>();
         iterable.forEach(posts::add);
